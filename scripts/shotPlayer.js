@@ -27,10 +27,12 @@ var shotPlayer = {
   },
 
   update() {
-    if (isShoot && this.timeToInsert <= 0) {
-      this.insert();
-    } else {
-      this.timeToInsert--;
+    if(!playerSprite.destroy) {
+      if (isShoot && this.timeToInsert <= 0) {
+        this.insert();
+      } else {
+        this.timeToInsert--;
+      }
     }
 
     this._shots.map((item, index) => {
