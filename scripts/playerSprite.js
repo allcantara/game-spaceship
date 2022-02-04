@@ -37,8 +37,8 @@ var playerSprite = {
         this.speed += this.gravity;
         this.x -= this.speed;
 
-        if (this.x <= -50) {
-          this.x = WIDTH + 50;
+        if (this.x <= 0) {
+          this.x = 0;
           this.resetSpeed();
         }
       }
@@ -47,21 +47,21 @@ var playerSprite = {
         this.speed += this.gravity;
         this.x += this.speed;
 
-        if (this.x >= WIDTH) {
-          this.x = -50;
+        if (this.x >= WIDTH - 50) {
+          this.x = WIDTH - 50;
           this.resetSpeed();
         }
       }
     }
 
-    let savedScore = localStorage.getItem("#score")
-    if(savedScore && savedScore < score) {
-      localStorage.setItem("#score", score)
-    }
-
     if(playerLife <= 0) {
       this.destroy = true;
-    }
+
+      let savedScore = getRecord();
+      if(savedScore && savedScore < score) {
+        changeRecord(score)
+      }
+    } 
   },
 
   resetSpeed() {

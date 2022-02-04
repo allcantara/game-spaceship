@@ -47,7 +47,6 @@ var shotPlayer = {
           this._shots.splice(index, 1);
           enemySprite._enemys.splice(enemyIndex, 1);
           score++;
-          console.log(score, playerLife)
         }
       });
     });

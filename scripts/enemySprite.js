@@ -7,9 +7,6 @@ var enemySprite = {
   color: "#ff9239",
   gravity: 0,
   speed: 4,
-  jumpForce: 23.6,
-  amoutToJump: 0,
-  score: 0,
   timeToInsert: 0,
 
   insert() {
@@ -18,10 +15,26 @@ var enemySprite = {
       y: -20,
     });
 
-    this.timeToInsert = 10 + Math.floor(40 * Math.random());
+    if (score < 20) {
+      this.timeToInsert = 10 + Math.floor(40 * Math.random());
+    } else if (score >= 20 && score < 40) {
+      this.timeToInsert = 10 + Math.floor(30 * Math.random());
+    } else if (score >= 40 && score <= 60) {
+      this.timeToInsert = 8 + Math.floor(30 * Math.random());
+    } else {
+      this.timeToInsert = 8 + Math.floor(20 * Math.random());
+    }
   },
 
   update() {
+    if (score < 20) {
+      this.speed = 4;
+    } else if (score >= 20 && score < 40) {
+      this.speed = 5;
+    } else {
+      this.speed = 6;
+    }
+    
     if (!playerSprite.destroy && this.timeToInsert <= 0) {
       this.insert();
     } else {
@@ -38,8 +51,15 @@ var enemySprite = {
       if (!playerSprite.destroy && playerSprite.y <= item.y && playerSprite.x + 50 >= item.x && playerSprite.x <= item.x + 60) {
         this._enemys.splice(index, 1);
         playerSprite.destroy = true;
+        playerLife = 0;
+
+        let savedScore = getRecord();
+        if (savedScore && savedScore < score) {
+          changeRecord(score);
+        }
       }
     });
+
   },
 
   toDraw() {

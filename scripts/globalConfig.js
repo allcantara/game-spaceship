@@ -8,7 +8,8 @@ var WIDTH,
   isKeyUp = false,
   obstaclesSpeed = 12,
   playerLife = 10,
-  score = 0;
+  score = 0,
+  record;
 
 const _createCanvas = () => {
   canvas = document.createElement("canvas");
@@ -25,13 +26,22 @@ const _createCanvas = () => {
   });
 };
 
+const getRecord = () => {
+  return localStorage.getItem("@spaceship_record") 
+}
+
+const changeRecord = (value) => {
+  record = value;
+  localStorage.setItem("@spaceship_record", value);
+}
+
 const _initGlobalConfig = () => {
   WIDTH = window.innerWidth;
-  HEIGHT = window.innerHeight;
+  HEIGHT = window.innerHeight + 200;
 
   if (WIDTH >= 500) {
     WIDTH = 600;
-    HEIGHT = 600;
+    HEIGHT = 600 + 200;
   }
 
   _createCanvas();

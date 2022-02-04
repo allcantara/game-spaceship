@@ -28,6 +28,14 @@ var shotEnemy = {
   },
 
   update() {
+    if (score < 20) {
+      this.speed = 6;
+    } else if (score >= 20 && score < 40) {
+      this.speed = 7;
+    } else {
+      this.speed = 9;
+    }
+
     enemySprite._enemys.map((enemy) => {
       if (!playerSprite.destroy) {
         if (this.timeToInsert <= 0) {
@@ -48,7 +56,6 @@ var shotEnemy = {
       if (!playerSprite.destroy && playerSprite.y <= item.y && playerSprite.x + 50 >= item.x && playerSprite.x <= item.x + 5) {
         this._shots.splice(index, 1);
         playerLife--;
-        console.log(score, playerLife);
       }
     });
   },
